@@ -1,8 +1,8 @@
 @echo off
-REM ´´½¨ÄúµÄ Conda ÐéÄâ»·¾³
-call conda env remove --name py310-venv_20240405_140626
+REM ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Conda ï¿½ï¿½ï¿½â»·ï¿½ï¿½
+call conda env remove --name py310-venv_20250703_115623-MediaCrawler
 
-REM È·ÈÏ»·¾³ÊÇ·ñÒÑ¾­É¾³ý³É¹¦
+REM È·ï¿½Ï»ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½É¾ï¿½ï¿½ï¿½É¹ï¿½
 call conda env list
 
 PAUSE

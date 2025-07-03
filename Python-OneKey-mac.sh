@@ -1,6 +1,6 @@
 #!/bin/bash
 # 创建 Conda 环境
-conda create -n py310-venv_20240405_140626 python=3.10 -y
+conda create -n py310-venv_20250703_115623-MediaCrawler python=3.10 -y
 
 # 确认安装包
 conda list

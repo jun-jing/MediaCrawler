@@ -1,20 +1,20 @@
 @echo off
 
-REM ╪╓╩НдЗ╣д Conda ╩╥╬Ёё╛py310д╛хо╩╥╬Ёё╛╨А╦эж╝╨С╫сио╩Ях║╣дvenv╨мй╠╪Дхуфзй╠╥жцК
-call conda activate py310-venv_20240405_140626
+REM О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ Conda О©╫О©╫О©╫О©╫О©╫О©╫py310д╛О©╫о╩О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ж╝О©╫О©╫О©╫О©╫о╩О©╫х║О©╫О©╫venvО©╫О©╫й╠О©╫О©╫О©╫О©╫О©╫О©╫й╠О©╫О©╫О©╫О©╫
+call conda activate py310-venv_20250703_115623-MediaCrawler
 
-REM хГ╧ШпХр╙╟╡в╟ pip ╟Эё╛©иртй╧сцртобцЭаНё╨
+REM О©╫О©╫О©╫О©╫О©╫р╙О©╫О©╫в╟ pip О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫й╧О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫Нё╨
 pip install -r Python-Requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple 
 
-REM хГ╧ШпХр╙╟╡в╟ pip ╟Эё╛©иртй╧сцртобцЭаНё╨
+REM О©╫О©╫О©╫О©╫О©╫р╙О©╫О©╫в╟ pip О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫й╧О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫Нё╨
 REM pip install your_required_package
-REM хГ╧Шpip ╟Эё╛╡╩Ёи╧╕©иртйтйтртобцЭаНё╨
+REM О©╫О©╫О©╫pip О©╫О©╫О©╫О©╫О©╫О©╫О©╫и╧О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫Нё╨
 REM call conda install your_required_package
 
-REM х╥хо╟╡в╟Ёи╧╕
+REM х╥О©╫о╟О©╫в╟О©╫и╧О©╫
 call conda list
 
-REM ╧ь╠у╩╥╬Ё
+REM О©╫ь╠у╩О©╫О©╫О©╫
 call conda deactivate
 
 PAUSE

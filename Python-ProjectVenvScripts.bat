@@ -1,11 +1,11 @@
 @echo off
-REM 激活您的 Conda 环境，py310默认环境，横杠之后接上获取的venv和时间日期时分秒
-call conda activate py310-venv_20240405_140626
+REM 锟斤拷锟斤拷锟斤拷锟斤拷 Conda 锟斤拷锟斤拷锟斤拷py310默锟较伙拷锟斤拷锟斤拷锟斤拷锟街拷锟斤拷锟较伙拷取锟斤拷venv锟斤拷时锟斤拷锟斤拷锟斤拷时锟斤拷锟斤拷
+call conda activate py310-venv_20250703_115623-MediaCrawler
 
-REM 运行 Python 脚本
+REM 锟斤拷锟斤拷 Python 锟脚憋拷
 python Python-Project.py
 
-REM 关闭 Conda 环境
+REM 锟截憋拷 Conda 锟斤拷锟斤拷
 call conda deactivate
 
 PAUSE

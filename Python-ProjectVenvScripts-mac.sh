@@ -4,7 +4,7 @@
 source /opt/anaconda3/etc/profile.d/conda.sh
 
 # 激活 Conda 环境
-conda activate py310-venv_20240405_140626
+conda activate py310-venv_20250703_115623-MediaCrawler
 
 # 运行 Python 脚本
 python App.py

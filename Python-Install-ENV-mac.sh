@@ -4,7 +4,7 @@
 source /opt/anaconda3/etc/profile.d/conda.sh
 
 # 激活 Conda 环境
-conda activate py310-venv_20240405_140626
+conda activate py310-venv_20250703_115623-MediaCrawler
 
 # 安装 requirements.txt 中的依赖
 pip install -r Python-Requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple 
