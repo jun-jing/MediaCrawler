@@ -40,10 +40,8 @@ Python-README
 先在平台上点击sync fork
 
 git checkout main
-git pull origin main
+git pull origin main         # 拉取最新的 main
 
-### 切回自己的开发分支
 git checkout my-feature
-
-### 合并 main 的更新进来
-git merge main
+git merge main               # 合并更新进来
+git push origin my-feature  # 推送到自己的 GitHub
