@@ -3,7 +3,7 @@ REM �������� Conda ������py310Ĭ�ϻ�����
 call conda activate py396-venv_20250703_115623-MediaCrawler
 
 REM ���� Python �ű�
-python Python-Project.py
+python main.py --platform xhs --lt qrcode --type detail
 
 REM �ر� Conda ����
 call conda deactivate

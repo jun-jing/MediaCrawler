@@ -4,7 +4,7 @@
 source /opt/anaconda3/etc/profile.d/conda.sh
 
 # 删除指定的 Conda 环境
-conda env remove --name py310-venv_20250703_115623-MediaCrawler
+conda env remove --name py396-venv_20250703_115623-MediaCrawler
 
 # 确认环境已被成功删除
 conda env list
