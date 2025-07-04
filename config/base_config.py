@@ -10,14 +10,14 @@
 
 
 # 基础配置
-# PLATFORM = "xhs"
-PLATFORM = "bili"
-KEYWORDS = "AI ASMR"  # 关键词搜索配置，以英文逗号分隔
+PLATFORM = "xhs"
+# PLATFORM = "bili"
+KEYWORDS = "打工人"  # 关键词搜索配置，以英文逗号分隔
 LOGIN_TYPE = "cookie"  # qrcode or phone or cookie
 # xhs的
-# COOKIES = "abRequestId=e44bc370-365a-552b-bd91-553159ab1d37; a1=19288ca7a3107agfu3koqtxedf970dokmzgz7qqkl50000129366; webId=06788441316b56c8670bec0d243961a9; gid=yjJYYS008d6jyjJYYS0W0uAAqy8W0ki7qTlAkT19Cdfiju28W8flTW888yJjqKK8j2Wd4Y20; customerClientId=201433196726349; x-user-id-creator.xiaohongshu.com=6612b4b3000000001701470f; unread={%22ub%22:%22682ac619000000002101ac34%22%2C%22ue%22:%2268464c540000000012006fad%22%2C%22uc%22:25}; access-token-creator.xiaohongshu.com=customer.creator.AT-68c517517077303958721166cnpans07kfvzd7k8; galaxy_creator_session_id=11yIuuqZiaXnIt8ZczkYDqYM0Le39EyN0Tqv; galaxy.creator.beaker.session.id=1750205947217065829237; x-user-id-school.xiaohongshu.com=6612b4b3000000001701470f; webBuild=4.70.2; websectiga=f3d8eaee8a8c63016320d94a1bd00562d516a5417bc43a032a80cbf70f07d5c0; sec_poison_id=2296819b-52bb-4916-baed-b5a56bbfb327; web_session=0400698dbfe6841329db0c5d533a4b93eb0e7e; xsecappid=ranchi; loadts=1751520643433"
+COOKIES = "abRequestId=e44bc370-365a-552b-bd91-553159ab1d37; a1=19288ca7a3107agfu3koqtxedf970dokmzgz7qqkl50000129366; webId=06788441316b56c8670bec0d243961a9; gid=yjJYYS008d6jyjJYYS0W0uAAqy8W0ki7qTlAkT19Cdfiju28W8flTW888yJjqKK8j2Wd4Y20; customerClientId=201433196726349; x-user-id-creator.xiaohongshu.com=6612b4b3000000001701470f; access-token-creator.xiaohongshu.com=customer.creator.AT-68c517517077303958721166cnpans07kfvzd7k8; galaxy_creator_session_id=11yIuuqZiaXnIt8ZczkYDqYM0Le39EyN0Tqv; galaxy.creator.beaker.session.id=1750205947217065829237; x-user-id-school.xiaohongshu.com=6612b4b3000000001701470f; web_session=0400698dbfe6841329db0c5d533a4b93eb0e7e; unread={%22ub%22:%22685a2082000000002400bb0b%22%2C%22ue%22:%22685001c50000000021000d25%22%2C%22uc%22:28}; webBuild=4.70.2; acw_tc=0a0b105a17516350284638506ecc6581941698715d66f1f29212313c31d4e2; websectiga=cf46039d1971c7b9a650d87269f31ac8fe3bf71d61ebf9d9a0a87efb414b816c; sec_poison_id=f2e557df-1d19-4dc1-92bd-bc7e422d2216; xsecappid=xhs-pc-web; loadts=1751635068554"
 # bilibil的
-COOKIES = "buvid3=3EE39555-446F-63E4-8DB6-E5DA344B451A98584infoc; b_nut=100; _uuid=4E10CEE34-191E-CB1010-2197-33C4EC7D7103C01228infoc; rpdid=|(k||kmkuYlY0J'u~k)~))|mm; enable_web_push=DISABLE; buvid4=160FC7E3-D9E8-FB73-4E62-76CD638A2C3702623-024101302-OQTY%2BrM5LNmURPXGcARn5A%3D%3D; fingerprint=d3a9785e4446b5516e9ffc3bbbe7261f; buvid_fp_plain=undefined; buvid_fp=d3a9785e4446b5516e9ffc3bbbe7261f; PVID=1; enable_feed_channel=ENABLE; CURRENT_QUALITY=80; share_source_origin=copy_web; hit-dyn-v2=1; dy_spec_agreed=1; bsource=search_google; DedeUserID=613341040; DedeUserID__ckMd5=26abc0768c47cfd1; CURRENT_FNVAL=4048; bp_t_offset_613341040=1081258897236295680; SESSDATA=501495b6%2C1767055934%2C618d1%2A71CjAF9CK-9vmx0ASQSAhJYQ9K31gNweApY4Nj9BPxw2mN-dGLAH-r5ljfLToMyvxh3bUSVkFLN1B3eFVZV3BxLXRHZVRwVW9VbjZQS2tmQXRULU50S2k1SFJIMkZmN1lYdlZqMkxkTm1TWFItOHRuZlZ0MFJEaFp5eGJxbGlCMWh4Ni14eEd5MEZnIIEC; bili_jct=37cd5e9528d2c27d9e9b7bee6358b8e6; sid=5f4asiou; b_lsid=264910CEC_197CECEA90D; header_theme_version=OPEN; theme-tip-show=SHOWED; theme-avatar-tip-show=SHOWED; home_feed_column=4; browser_resolution=1060-2294; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE3ODA1NjIsImlhdCI6MTc1MTUyMTMwMiwicGx0IjotMX0.S3IcXcuj8xEB-f_vxhkoLF3mIkce-UV2CIBlMhlNTko; bili_ticket_expires=1751780502"
+# COOKIES = "buvid3=3EE39555-446F-63E4-8DB6-E5DA344B451A98584infoc; b_nut=100; _uuid=4E10CEE34-191E-CB1010-2197-33C4EC7D7103C01228infoc; rpdid=|(k||kmkuYlY0J'u~k)~))|mm; enable_web_push=DISABLE; buvid4=160FC7E3-D9E8-FB73-4E62-76CD638A2C3702623-024101302-OQTY%2BrM5LNmURPXGcARn5A%3D%3D; fingerprint=d3a9785e4446b5516e9ffc3bbbe7261f; buvid_fp_plain=undefined; buvid_fp=d3a9785e4446b5516e9ffc3bbbe7261f; PVID=1; enable_feed_channel=ENABLE; CURRENT_QUALITY=80; share_source_origin=copy_web; hit-dyn-v2=1; dy_spec_agreed=1; bsource=search_google; DedeUserID=613341040; DedeUserID__ckMd5=26abc0768c47cfd1; CURRENT_FNVAL=4048; bp_t_offset_613341040=1081258897236295680; SESSDATA=501495b6%2C1767055934%2C618d1%2A71CjAF9CK-9vmx0ASQSAhJYQ9K31gNweApY4Nj9BPxw2mN-dGLAH-r5ljfLToMyvxh3bUSVkFLN1B3eFVZV3BxLXRHZVRwVW9VbjZQS2tmQXRULU50S2k1SFJIMkZmN1lYdlZqMkxkTm1TWFItOHRuZlZ0MFJEaFp5eGJxbGlCMWh4Ni14eEd5MEZnIIEC; bili_jct=37cd5e9528d2c27d9e9b7bee6358b8e6; sid=5f4asiou; b_lsid=264910CEC_197CECEA90D; header_theme_version=OPEN; theme-tip-show=SHOWED; theme-avatar-tip-show=SHOWED; home_feed_column=4; browser_resolution=1060-2294; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE3ODA1NjIsImlhdCI6MTc1MTUyMTMwMiwicGx0IjotMX0.S3IcXcuj8xEB-f_vxhkoLF3mIkce-UV2CIBlMhlNTko; bili_ticket_expires=1751780502"
 # 具体值参见media_platform.xxx.field下的枚举值，暂时只支持小红书
 SORT_TYPE = "popularity_descending"
 # 具体值参见media_platform.xxx.field下的枚举值，暂时只支持抖音
@@ -77,7 +77,8 @@ BROWSER_LAUNCH_TIMEOUT = 30
 AUTO_CLOSE_BROWSER = True
 
 # 数据保存类型选项配置,支持三种类型：csv、db、json, 最好保存到DB，有排重的功能。
-SAVE_DATA_OPTION = "json"  # csv or db or json
+# SAVE_DATA_OPTION = "json"  # csv or db or json
+SAVE_DATA_OPTION = "db"  # csv or db or json
 
 # 用户浏览器缓存的浏览器文件配置
 USER_DATA_DIR = "%s_user_data_dir"  # %s will be replaced by platform name
