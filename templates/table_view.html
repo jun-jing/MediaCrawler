@@ -3,18 +3,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ table_name }}</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .preset-buttons {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .preset-buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .preset-buttons button:hover {
+            background-color: #e0e0e0;
+        }
         table {
             border-collapse: collapse;
             width: 100%;
+            margin-top: 20px;
         }
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
+            text-align: left;
+            word-wrap: break-word;
         }
         th {
             cursor: pointer;
+            background-color: #f4f4f4;
+        }
+        th:hover {
+            background-color: #e0e0e0;
+        }
+        td {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        td.expandable {
+            white-space: normal;
+        }
+        .responsive-table {
+            overflow-x: auto;
+        }
+        .image-container img {
+            max-width: 100px;
+            max-height: 100px;
+            margin: 5px;
+        }
+        .video-button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .video-button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 768px) {
+            table {
+                font-size: 12px;
+            }
+            th, td {
+                padding: 6px;
+            }
         }
     </style>
     <script>
@@ -43,6 +111,14 @@
 <body>
     <h1>Table: {{ table_name }}</h1>
 
+    <!-- 预设维度选择 -->
+    <div class="preset-buttons">
+        <h3>Quick Select Dimensions:</h3>
+        {% for preset, columns in preset_dimensions.items() %}
+        <button onclick="window.location.href='?preset={{ preset }}'">{{ preset.replace('_', ' ').title() }}</button>
+        {% endfor %}
+    </div>
+
     <!-- 列选择表单 -->
     <form id="columnsForm" method="POST" action="{{ url_for('show_table', table_name=table_name) }}">
         <h3>Select Columns:</h3>
@@ -57,29 +133,51 @@
     </form>
 
     <!-- 数据表 -->
-    <table>
-        <thead>
-            <tr>
-                {% for column in selected_columns %}
-                <th onclick="sortTable('{{ column }}')">
-                    {{ column }}
-                    {% if sort_column == column %}
-                        {% if sort_order == 'asc' %}▲{% else %}▼{% endif %}
-                    {% endif %}
-                </th>
+    <div class="responsive-table">
+        <table>
+            <thead>
+                <tr>
+                    {% for column in selected_columns %}
+                    <th onclick="sortTable('{{ column }}')">
+                        {{ column }}
+                        {% if sort_column == column %}
+                            {% if sort_order == 'asc' %}▲{% else %}▼{% endif %}
+                        {% endif %}
+                    </th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    {% for column in selected_columns %}
+                    <td class="{% if column == 'desc' %}expandable{% endif %}">
+                        {% if column == 'image_list' %}
+                            {% if row[column] %}
+                            <div class="image-container">
+                                {% for image_url in row[column].split(',') %}
+                                <img src="{{ image_url }}" alt="Image">
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            无图片
+                            {% endif %}
+                        {% elif column == 'video_url' %}
+                            {% if row[column] %}
+                            <a href="{{ row[column] }}" class="video-button" target="_blank">播放视频</a>
+                            {% else %}
+                            无视频
+                            {% endif %}
+                        {% else %}
+                            {{ row[column] }}
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
                 {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in rows %}
-            <tr>
-                {% for column in selected_columns %}
-                <td>{{ row[column] }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 
     <a href="{{ url_for('list_tables') }}">Back to Tables</a>
 </body>

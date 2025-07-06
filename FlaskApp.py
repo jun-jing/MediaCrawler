@@ -51,7 +51,18 @@ def show_table(table_name):
         db = get_db()
         cursor = db.cursor(dictionary=True)
 
+        # 定义预设维度
+        preset_dimensions = {
+            'description_likes': ['desc', 'liked_count', 'nickname', 'last_update_time'],
+            'description_comments': ['desc', 'comment_count', 'nickname', 'last_update_time'],
+            'description_basic_info': ['desc', 'title', 'video_url', 'time'],
+            'likes': ['liked_count', 'nickname', 'last_update_time'],
+            'comments': ['comment_count', 'content', 'nickname', 'last_update_time'],
+            'basic_info': ['title', 'video_url', 'time']
+        }
+
         # 获取列选择和排序参数
+        selected_preset = request.args.get('preset', None)  # 获取预设维度
         selected_columns = request.form.getlist('columns')  # 从表单获取选中的列
         sort_column = request.args.get('sort', None)  # 获取排序列
         sort_order = request.args.get('order', 'asc')  # 获取排序顺序
@@ -60,12 +71,15 @@ def show_table(table_name):
         cursor.execute(f"DESCRIBE {table_name}")
         all_columns = [column['Field'] for column in cursor.fetchall()]
 
+        # 如果选择了预设维度，使用预设列
+        if selected_preset in preset_dimensions:
+            selected_columns = preset_dimensions[selected_preset]
+
         # 如果没有选择列，默认显示所有列
         if not selected_columns:
             selected_columns = all_columns
 
         # 构建查询语句
-        # 用反引号包裹列名
         columns_str = ', '.join([f"`{col}`" for col in selected_columns])
         query = f"SELECT {columns_str} FROM `{table_name}`"
         if sort_column and sort_column in selected_columns:
@@ -83,7 +97,8 @@ def show_table(table_name):
             all_columns=all_columns,
             selected_columns=selected_columns,
             sort_column=sort_column,
-            sort_order=sort_order
+            sort_order=sort_order,
+            preset_dimensions=preset_dimensions
         )
     except Exception as e:
         return f"Error: {str(e)}"
