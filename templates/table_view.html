@@ -1,0 +1,86 @@
+<!-- filepath: d:\Code\GitProject\typoraNotes\Python\venv_20250703_115623-MediaCrawler\templates\table_view.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ table_name }}</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        // 提交列选择表单
+        function submitColumnsForm() {
+            document.getElementById('columnsForm').submit();
+        }
+
+        // 排序功能
+        function sortTable(column) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentSort = urlParams.get('sort');
+            const currentOrder = urlParams.get('order') || 'asc';
+
+            if (currentSort === column) {
+                urlParams.set('order', currentOrder === 'asc' ? 'desc' : 'asc');
+            } else {
+                urlParams.set('sort', column);
+                urlParams.set('order', 'asc');
+            }
+
+            window.location.search = urlParams.toString();
+        }
+    </script>
+</head>
+<body>
+    <h1>Table: {{ table_name }}</h1>
+
+    <!-- 列选择表单 -->
+    <form id="columnsForm" method="POST" action="{{ url_for('show_table', table_name=table_name) }}">
+        <h3>Select Columns:</h3>
+        {% for column in all_columns %}
+        <label>
+            <input type="checkbox" name="columns" value="{{ column }}" 
+                   {% if column in selected_columns %}checked{% endif %} 
+                   onchange="submitColumnsForm()">
+            {{ column }}
+        </label>
+        {% endfor %}
+    </form>
+
+    <!-- 数据表 -->
+    <table>
+        <thead>
+            <tr>
+                {% for column in selected_columns %}
+                <th onclick="sortTable('{{ column }}')">
+                    {{ column }}
+                    {% if sort_column == column %}
+                        {% if sort_order == 'asc' %}▲{% else %}▼{% endif %}
+                    {% endif %}
+                </th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                {% for column in selected_columns %}
+                <td>{{ row[column] }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('list_tables') }}">Back to Tables</a>
+</body>
+</html>
