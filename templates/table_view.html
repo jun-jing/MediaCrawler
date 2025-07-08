@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ table_name }}</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,6 +58,10 @@
         td.expandable {
             white-space: normal;
         }
+        td.video-cell { /* New style for video cells */
+            white-space: normal; /* Allow video player to wrap if needed */
+            min-width: 200px; /* Give video some base width */
+        }
         .responsive-table {
             overflow-x: auto;
         }
@@ -63,6 +69,15 @@
             max-width: 100px;
             max-height: 100px;
             margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .image-container a {
+            margin-right: 5px; /* Add some space between image links */
+        }
+        .plyr {
+            max-width: 100%; /* Ensure video player fits cell */
+            display: block; /* Helps with layout */
         }
         .video-button {
             display: inline-block;
@@ -149,14 +164,18 @@
             </thead>
             <tbody>
                 {% for row in rows %}
+                {% set current_row_index = loop.index %}
                 <tr>
                     {% for column in selected_columns %}
-                    <td class="{% if column == 'desc' %}expandable{% endif %}">
+                    {% set current_column_name = column %}
+                    <td class="{% if column == 'desc' %}expandable{% endif %}{% if column == 'video_url' and row[column] %} video-cell{% endif %}">
                         {% if column == 'image_list' %}
                             {% if row[column] %}
                             <div class="image-container">
                                 {% for image_url in row[column].split(',') %}
-                                <img src="{{ image_url }}" alt="Image">
+                                <a href="{{ image_url }}" data-lightbox="gallery-row{{ current_row_index }}-col{{ current_column_name }}" data-title="Image {{ loop.index }}">
+                                    <img src="{{ image_url }}" alt="Image {{ loop.index }}">
+                                </a>
                                 {% endfor %}
                             </div>
                             {% else %}
@@ -164,9 +183,18 @@
                             {% endif %}
                         {% elif column == 'video_url' %}
                             {% if row[column] %}
-                            <a href="{{ row[column] }}" class="video-button" target="_blank">播放视频</a>
+                            <video controls playsinline data-plyr-config='{ "fullscreen": { "enabled": true, "fallback": true, "iosNative": true } }'>
+                                <source src="{{ row[column] }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                             {% else %}
                             无视频
+                            {% endif %}
+                        {% elif column == 'note_url' %}
+                            {% if row[column] %}
+                            <a href="{{ row[column] }}" target="_blank" rel="noopener noreferrer">{{ row[column] }}</a>
+                            {% else %}
+                            无链接
                             {% endif %}
                         {% else %}
                             {{ row[column] }}
@@ -180,5 +208,20 @@
     </div>
 
     <a href="{{ url_for('list_tables') }}">Back to Tables</a>
+
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Plyr video players
+            const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+            // Initialize Lightbox2
+            lightbox.option({
+                'resizeDuration': 200,
+                'wrapAround': true
+            });
+        });
+    </script>
 </body>
 </html>
