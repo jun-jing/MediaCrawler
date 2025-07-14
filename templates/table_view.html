@@ -55,14 +55,16 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        td.expandable {
+        .expandable-cell {
             white-space: normal;
-            max-width: none;
             overflow: visible;
             text-overflow: clip;
         }
         .expandable-desc {
             cursor: pointer;
+        }
+        .highlight {
+            color: red;
         }
         td.video-cell { /* New style for video cells */
             white-space: normal; /* Allow video player to wrap if needed */
@@ -172,7 +174,13 @@
                 {% for row in rows %}
                 <tr>
                     {% for column in selected_columns %}
-                    <td {% if column == 'desc' %}class="expandable-desc"{% endif %}>
+                    <td 
+                        {% if column == 'desc' %}
+                            class="expandable-desc"
+                        {% elif column == 'liked_count' and row[column] | int > 10000 %}
+                            class="highlight"
+                        {% endif %}
+                    >
                         {% if column == 'image_list' %}
                             {% if row[column] %}
                             <div>
@@ -224,9 +232,12 @@
 
             // Add click event listener for expandable descriptions
             document.querySelectorAll('.expandable-desc').forEach(cell => {
-                cell.addEventListener('click', () => {
-                    cell.classList.toggle('expandable');
-                });
+                // Check if the content is truncated
+                if (cell.scrollWidth > cell.clientWidth) {
+                    cell.addEventListener('click', () => {
+                        cell.classList.toggle('expandable-cell');
+                    });
+                }
             });
         });
     </script>
