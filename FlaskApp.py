@@ -53,12 +53,7 @@ def show_table(table_name):
 
         # 定义预设维度
         preset_dimensions = {
-            'description_likes': ['desc', 'liked_count', 'nickname', 'last_update_time'],
-            'description_comments': ['desc', 'comment_count', 'nickname', 'last_update_time'],
-            'description_basic_info': ['desc', 'title', 'video_url', 'time'],
-            'likes': ['liked_count', 'nickname', 'last_update_time'],
-            'comments': ['comment_count', 'content', 'nickname', 'last_update_time'],
-            'basic_info': ['title', 'video_url', 'time']
+            'desc_liked_count': ['title', 'nickname', 'desc', 'liked_count', 'note_url', 'last_update_time']
         }
 
         # 获取列选择和排序参数
@@ -82,13 +77,20 @@ def show_table(table_name):
         # 构建查询语句
         columns_str = ', '.join([f"`{col}`" for col in selected_columns])
         query = f"SELECT {columns_str} FROM `{table_name}`"
-        if sort_column and sort_column in selected_columns:
+        if selected_preset == 'desc_liked_count':
+            query += " ORDER BY `last_update_time` DESC, `liked_count` DESC"
+        elif sort_column and sort_column in selected_columns:
             query += f" ORDER BY `{sort_column}` {sort_order.upper()}"
         query += " LIMIT 100"
 
         cursor.execute(query)
         rows = cursor.fetchall()
         cursor.close()
+
+        # Multiply the 'desc' content by 5 for testing
+        for row in rows:
+            if 'desc' in row:
+                row['desc'] = row['desc'] * 5
 
         return render_template(
             'table_view.html',

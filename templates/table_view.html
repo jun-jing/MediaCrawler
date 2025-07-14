@@ -57,6 +57,12 @@
         }
         td.expandable {
             white-space: normal;
+            max-width: none;
+            overflow: visible;
+            text-overflow: clip;
+        }
+        .expandable-desc {
+            cursor: pointer;
         }
         td.video-cell { /* New style for video cells */
             white-space: normal; /* Allow video player to wrap if needed */
@@ -166,7 +172,7 @@
                 {% for row in rows %}
                 <tr>
                     {% for column in selected_columns %}
-                    <td>
+                    <td {% if column == 'desc' %}class="expandable-desc"{% endif %}>
                         {% if column == 'image_list' %}
                             {% if row[column] %}
                             <div>
@@ -188,6 +194,8 @@
                             {% else %}
                             无视频
                             {% endif %}
+                        {% elif column == 'note_url' %}
+                            <a href="{{ row[column] }}" target="_blank">{{ row[column] }}</a>
                         {% else %}
                             {{ row[column] }}
                         {% endif %}
@@ -212,6 +220,13 @@
             lightbox.option({
                 'resizeDuration': 200,
                 'wrapAround': true
+            });
+
+            // Add click event listener for expandable descriptions
+            document.querySelectorAll('.expandable-desc').forEach(cell => {
+                cell.addEventListener('click', () => {
+                    cell.classList.toggle('expandable');
+                });
             });
         });
     </script>
