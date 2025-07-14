@@ -137,10 +137,32 @@
     <!-- 预设维度选择 -->
     <div class="preset-buttons">
         <h3>Quick Select Dimensions:</h3>
+        <select name="source_keyword" id="keyword-select" onchange="updatePresetButton()">
+            <option value="all" {% if not selected_keyword or selected_keyword == 'all' %}selected{% endif %}>All</option>
+            {% for keyword in source_keywords %}
+            <option value="{{ keyword }}" {% if selected_keyword == keyword %}selected{% endif %}>{{ keyword }}</option>
+            {% endfor %}
+        </select>
         {% for preset, columns in preset_dimensions.items() %}
-        <button onclick="window.location.href='?preset={{ preset }}'">{{ preset.replace('_', ' ').title() }}</button>
+        <button id="preset-button-{{ preset }}" onclick="applyPreset('{{ preset }}')">{{ preset.replace('_', ' ').title() }}</button>
         {% endfor %}
     </div>
+
+    <script>
+        function updatePresetButton() {
+            // This function is not strictly necessary anymore with the new approach,
+            // but can be kept for future dynamic interactions.
+        }
+
+        function applyPreset(preset) {
+            const keyword = document.getElementById('keyword-select').value;
+            let url = `?preset=${preset}`;
+            if (keyword) {
+                url += `&source_keyword=${keyword}`;
+            }
+            window.location.href = url;
+        }
+    </script>
 
     <!-- 列选择表单 -->
     <form id="columnsForm" method="POST" action="{{ url_for('show_table', table_name=table_name) }}">

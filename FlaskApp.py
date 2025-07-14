@@ -57,14 +57,21 @@ def show_table(table_name):
         }
 
         # 获取列选择和排序参数
-        selected_preset = request.args.get('preset', None)  # 获取预设维度
-        selected_columns = request.form.getlist('columns')  # 从表单获取选中的列
-        sort_column = request.args.get('sort', None)  # 获取排序列
-        sort_order = request.args.get('order', 'asc')  # 获取排序顺序
+        selected_preset = request.args.get('preset', None)
+        selected_columns = request.form.getlist('columns')
+        sort_column = request.args.get('sort', None)
+        sort_order = request.args.get('order', 'asc')
+        source_keyword = request.args.get('source_keyword', None)
 
         # 获取表的所有列
         cursor.execute(f"DESCRIBE {table_name}")
         all_columns = [column['Field'] for column in cursor.fetchall()]
+
+        # 获取 source_keyword 的所有唯一值
+        source_keywords = []
+        if 'source_keyword' in all_columns:
+            cursor.execute(f"SELECT DISTINCT source_keyword FROM {table_name}")
+            source_keywords = [row['source_keyword'] for row in cursor.fetchall()]
 
         # 如果选择了预设维度，使用预设列
         if selected_preset in preset_dimensions:
@@ -77,10 +84,21 @@ def show_table(table_name):
         # 构建查询语句
         columns_str = ', '.join([f"`{col}`" for col in selected_columns])
         query = f"SELECT {columns_str} FROM `{table_name}`"
+
+        # 添加 source_keyword 过滤
+        where_clauses = []
+        if source_keyword and source_keyword != 'all':
+            where_clauses.append(f"`source_keyword` = '{source_keyword}'")
+        
+        if where_clauses:
+            query += " WHERE " + " AND ".join(where_clauses)
+
+        # 应用排序
         if selected_preset == 'desc_liked_count':
             query += " ORDER BY `last_update_time` DESC, `liked_count` DESC"
         elif sort_column and sort_column in selected_columns:
             query += f" ORDER BY `{sort_column}` {sort_order.upper()}"
+        
         query += " LIMIT 100"
 
         cursor.execute(query)
@@ -100,7 +118,9 @@ def show_table(table_name):
             selected_columns=selected_columns,
             sort_column=sort_column,
             sort_order=sort_order,
-            preset_dimensions=preset_dimensions
+            preset_dimensions=preset_dimensions,
+            source_keywords=source_keywords,
+            selected_keyword=source_keyword
         )
     except Exception as e:
         return f"Error: {str(e)}"
