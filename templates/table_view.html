@@ -164,17 +164,15 @@
             </thead>
             <tbody>
                 {% for row in rows %}
-                {% set current_row_index = loop.index %}
                 <tr>
                     {% for column in selected_columns %}
-                    {% set current_column_name = column %}
-                    <td class="{% if column == 'desc' %}expandable{% endif %}{% if column == 'video_url' and row[column] %} video-cell{% endif %}">
+                    <td>
                         {% if column == 'image_list' %}
                             {% if row[column] %}
-                            <div class="image-container">
+                            <div>
                                 {% for image_url in row[column].split(',') %}
-                                <a href="{{ image_url }}" data-lightbox="gallery-row{{ current_row_index }}-col{{ current_column_name }}" data-title="Image {{ loop.index }}">
-                                    <img src="{{ image_url }}" alt="Image {{ loop.index }}">
+                                <a href="{{ image_url.strip() }}" target="_blank">
+                                    <img src="{{ image_url.strip() }}" alt="Image" style="max-width: 100px; max-height: 100px; margin: 5px;">
                                 </a>
                                 {% endfor %}
                             </div>
@@ -183,18 +181,12 @@
                             {% endif %}
                         {% elif column == 'video_url' %}
                             {% if row[column] %}
-                            <video controls playsinline data-plyr-config='{ "fullscreen": { "enabled": true, "fallback": true, "iosNative": true } }'>
-                                <source src="{{ row[column] }}" type="video/mp4">
+                            <video controls style="max-width: 300px; max-height: 200px;">
+                                <source src="{{ row[column].strip() }}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
                             {% else %}
                             无视频
-                            {% endif %}
-                        {% elif column == 'note_url' %}
-                            {% if row[column] %}
-                            <a href="{{ row[column] }}" target="_blank" rel="noopener noreferrer">{{ row[column] }}</a>
-                            {% else %}
-                            无链接
                             {% endif %}
                         {% else %}
                             {{ row[column] }}
