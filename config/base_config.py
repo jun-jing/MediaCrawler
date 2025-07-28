@@ -14,7 +14,8 @@ PLATFORM = "xhs"
 # PLATFORM = "bili"
 # KEYWORDS = "打工人"  # 关键词搜索配置，以英文逗号分隔
 # KEYWORDS = "asmr"
-KEYWORDS = "寿司开店"
+# KEYWORDS = "寿司店装修"
+KEYWORDS = "大学生接私活地点武汉"
 
 LOGIN_TYPE = "cookie"  # qrcode or phone or cookie
 # xhs的
